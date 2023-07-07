@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'result.dart';
+import 'calculator.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -205,6 +207,7 @@ class _BmiHomeState extends State<BmiHome> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FloatingActionButton(
+                            heroTag: 'plus',
                             backgroundColor: Color(0xFF212747),
                             child: Icon(
                               Icons.add,
@@ -221,6 +224,7 @@ class _BmiHomeState extends State<BmiHome> {
                             width: 25.0,
                           ),
                           FloatingActionButton(
+                            heroTag: 'minus',
                             backgroundColor: Color(0xFF212747),
                             child: Icon(
                               Icons.remove,
@@ -272,6 +276,7 @@ class _BmiHomeState extends State<BmiHome> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FloatingActionButton(
+                            heroTag: 'plus2',
                             backgroundColor: Color(0xFF212747),
                             child: Icon(
                               Icons.add,
@@ -288,6 +293,7 @@ class _BmiHomeState extends State<BmiHome> {
                             width: 25.0,
                           ),
                           FloatingActionButton(
+                            heroTag: 'minus2',
                             backgroundColor: Color(0xFF212747),
                             child: Icon(
                               Icons.remove,
@@ -319,10 +325,14 @@ class _BmiHomeState extends State<BmiHome> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
+                  Calculator calc = Calculator(weight: weight, height: height);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) {
-                      return Result();
+                      return Result(
+                        bmiResult: calc.bmiCalculate(),
+                      );
                     }),
                   );
                 },
